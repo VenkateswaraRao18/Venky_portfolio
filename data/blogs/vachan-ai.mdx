@@ -1,0 +1,125 @@
+---
+title: "Vachan AI: A Dialect-Aware Telugu Foundation Model"
+date: "2026-02-26"
+description: "Designing, training, and evaluating a dialect-aware Telugu foundation model capable of understanding regional slang, conversational nuance, and code-mixed language."
+readTime: "22 min read"
+---
+
+# Vachan AI
+
+Vachan AI is a dialect-aware Telugu foundation model engineered to understand, generate, and reason across regional and conversational variations of Telugu.
+
+Unlike most existing Telugu language models trained primarily on standardized written corpora, Vachan AI explicitly models dialect diversity, slang variation, and real-world code-mixed usage.
+
+This work is part of our broader research at Nexora AI Labs to build culturally grounded, region-aware AI systems for low-resource languages.
+
+---
+
+## 1. Motivation
+
+Telugu is spoken by more than 80 million people. However, real-world Telugu is not monolithic. It varies significantly across:
+
+- Telangana  
+- Coastal Andhra  
+- Rayalaseema  
+
+These variations affect:
+
+- Vocabulary  
+- Morphology  
+- Tone  
+- Pragmatics  
+- Slang  
+- Code-mixing frequency  
+
+Most multilingual LLMs treat Telugu as a standardized written language. As a result:
+
+- Informal conversations degrade in quality  
+- Regional idioms are misinterpreted  
+- Slang is treated as noise  
+- Code-mixed inputs reduce coherence  
+
+Vachan AI aims to close this gap.
+
+---
+
+## 2. Problem Definition
+
+We define dialect-aware language modeling as learning:
+
+P(text | dialect, context)
+
+Where:
+
+dialect ∈ {Telangana, Coastal, Rayalaseema, Neutral}
+
+Objectives:
+
+1. Improve conversational coherence across dialects  
+2. Preserve linguistic authenticity  
+3. Enhance slang understanding  
+4. Improve robustness to code-mixed inputs  
+5. Enable controllable regional style generation  
+
+---
+
+## 3. Dataset Construction
+
+### 3.1 Corpus Overview
+
+Total corpus:
+
+- 7.8M sentences  
+- ~620M tokens  
+
+Dialect distribution:
+
+| Region | Percentage |
+|--------|------------|
+| Telangana | 38% |
+| Coastal Andhra | 34% |
+| Rayalaseema | 28% |
+
+Code-mixed Telugu-English samples: 22%
+
+Average sentence length: 17.4 tokens
+
+---
+
+### 3.2 Data Sources
+
+Data was curated from:
+
+- Regional news websites  
+- YouTube transcripts  
+- Public interviews  
+- Podcasts  
+- Public social media conversations  
+- Community discussion forums  
+
+All sources were filtered using:
+
+- Language identification models  
+- Profanity normalization  
+- Deduplication pipelines  
+- Noise filtering heuristics  
+
+---
+
+### 3.3 Dialect Annotation Pipeline
+
+Dialect labels were assigned using:
+
+1. Source metadata  
+2. Lexical region markers  
+3. Region-specific vocabulary dictionaries  
+4. Rule-based classifier  
+
+Example:
+
+```json
+{
+  "text": "ఎలా ఉన్నావ్ రా?",
+  "dialect": "Telangana",
+  "formality": "informal"
+}

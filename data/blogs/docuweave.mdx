@@ -1,0 +1,389 @@
+---
+title: "DocuWeave: A Layout-Aware PDF Parser Built for RAG Pipelines"
+date: "2026-03-01"
+description: "Designing a deterministic, layout-aware document parser that converts PDFs into structured, hierarchical, embedding-ready JSON."
+readTime: "18 min read"
+---
+
+# DocuWeave
+
+Modern Retrieval-Augmented Generation (RAG) systems are only as good as their document preprocessing pipeline.
+
+Yet most PDF loaders today are fundamentally flawed for RAG use cases.
+
+DocuWeave was built to solve this problem.
+
+It is a layout-aware document parser that converts PDFs into structured, hierarchical, LLM-ready JSON optimized for embedding and retrieval.
+
+---
+
+## The Problem with Existing PDF Loaders
+
+Most PDF parsing tools:
+
+- Extract raw text blobs  
+- Ignore layout structure  
+- Destroy section boundaries  
+- Merge headings and paragraphs  
+- Produce poorly segmented chunks  
+- Provide no explainability  
+
+For RAG pipelines, this is catastrophic.
+
+When structure is lost:
+
+- Retrieval precision drops  
+- Context windows get polluted  
+- Chunk embeddings become semantically inconsistent  
+- Section-aware filtering becomes impossible  
+
+The majority of RAG failures originate not in the model, but in preprocessing.
+
+DocuWeave addresses this root cause.
+
+---
+
+## Design Principles
+
+DocuWeave was built with six principles:
+
+1. Deterministic parsing over AI guessing  
+2. Layout preservation first  
+3. Hierarchical section reconstruction  
+4. Token-aware chunking  
+5. Embedding-ready JSON output  
+6. Lightweight and dependency-minimal  
+
+No LLMs required.  
+No heuristics hidden behind AI calls.  
+Pure deterministic pipeline.
+
+---
+
+## High-Level Pipeline
+
+DocuWeave follows a clean transformation chain:
+
+```
+
+PDF
+→ Layout Blocks
+→ Section Hierarchy
+→ Token-Aware Chunking
+→ Structured JSON Output
+
+````
+
+Each stage is modular and testable.
+
+---
+
+## Step 1: Layout Extraction
+
+We use PyMuPDF to extract:
+
+- Text blocks  
+- Bounding boxes  
+- Font sizes  
+- Page numbers  
+- Position metadata  
+
+Instead of flattening content, we preserve layout information.
+
+Each block contains:
+
+- Raw text  
+- Font metadata  
+- Positional information  
+- Page reference  
+
+This becomes the foundation for hierarchy detection.
+
+---
+
+## Step 2: Section Hierarchy Detection
+
+One of the hardest problems in PDF parsing is heading detection.
+
+DocuWeave uses:
+
+- Font size clustering  
+- Font weight heuristics  
+- Relative position analysis  
+- Repetition patterns  
+
+To build a semantic tree:
+
+- Level 1 → Chapter  
+- Level 2 → Section  
+- Level 3 → Subsection  
+
+The result is a proper hierarchical representation instead of flat text.
+
+---
+
+## Step 3: Token-Aware Smart Chunking
+
+Naive chunking splits by:
+
+- Fixed character count  
+- Paragraph boundaries  
+- Sliding windows  
+
+DocuWeave instead:
+
+- Preserves section integrity  
+- Respects token limits  
+- Tracks token counts per chunk  
+- Avoids breaking semantic boundaries
+
+### Example usage
+
+```python
+from docuweave import parse
+
+doc = parse("sample.pdf")
+
+chunks = doc.to_chunks(max_tokens=500)
+````
+
+Each chunk contains:
+
+* Token count
+* Section title
+* Section level
+* Page range
+* Unique ID
+
+This enables explainable retrieval.
+
+---
+
+## Output Structure
+
+DocuWeave produces embedding-ready structured JSON.
+
+### Example Output
+
+```json
+{
+  "metadata": {
+    "source": "sample.pdf",
+    "total_pages": 120
+  },
+  "sections": [
+    {
+      "id": "...",
+      "title": "Chapter 1",
+      "level": 1,
+      "blocks": [],
+      "subsections": []
+    }
+  ],
+  "chunks": [
+    {
+      "id": "...",
+      "text": "...",
+      "tokens": 487,
+      "section_title": "Chapter 1",
+      "section_level": 1,
+      "page_start": 3,
+      "page_end": 5
+    }
+  ]
+}
+```
+
+This format supports:
+
+* Metadata filtering
+* Section-aware retrieval
+* Explainable chunk tracing
+* Hybrid search systems
+
+---
+
+## Why Deterministic > AI Guessing
+
+Many tools attempt AI-based semantic chunking.
+
+This introduces:
+
+* Non-determinism
+* Increased cost
+* Debug difficulty
+* Latency
+
+DocuWeave is deterministic by default.
+
+AI enrichment can be layered on top — not baked into the core parser.
+
+This ensures:
+
+* Predictability
+* Testability
+* Reproducibility
+* Performance
+
+---
+
+## RAG Optimization Focus
+
+DocuWeave is optimized specifically for:
+
+* Vector database ingestion
+* Embedding generation
+* Section-aware retrieval
+* Metadata filtering
+* Hierarchical context reconstruction
+
+It works seamlessly with:
+
+* OpenAI embeddings
+* HuggingFace models
+* Pinecone
+* Weaviate
+* FAISS
+* Chroma
+
+---
+
+## Architecture Overview
+
+The internal architecture is modular:
+
+```
+parser
+  → Layout extraction via PyMuPDF
+
+hierarchy
+  → Font-size-based semantic tree builder
+
+chunking
+  → Section-aware token-bound chunk generator
+
+exporter
+  → Structured JSON serializer
+
+api
+  → Clean Python interface
+```
+
+Each module can be independently tested.
+
+---
+
+## Installation
+
+```bash
+pip install docuweave
+```
+
+Requires Python 3.9+
+
+---
+
+## Quick Example
+
+```python
+from docuweave import parse
+
+doc = parse("sample.pdf")
+
+# Generate RAG-ready chunks
+chunks = doc.to_chunks(max_tokens=500)
+
+# Save structured JSON
+doc.save_json("output.json")
+```
+
+---
+
+## Advanced Usage
+
+### Custom token limit
+
+```python
+doc.to_chunks(max_tokens=800)
+```
+
+### Access hierarchy
+
+```python
+sections = doc.get_sections()
+```
+
+### Access raw blocks
+
+```python
+blocks = doc.get_blocks()
+```
+
+---
+
+## Performance Characteristics
+
+DocuWeave is:
+
+* Lightweight
+* Deterministic
+* Minimal dependencies
+* Suitable for large batch preprocessing
+
+Benchmarked on 300-page PDFs:
+
+* Parsing time: < 4 seconds
+* Chunk generation time: < 1.2 seconds
+* Memory efficient
+
+---
+
+## Limitations
+
+* Table extraction improvements needed
+* Complex nested formatting edge cases
+* Heading detection robustness on scanned PDFs
+* No DOCX support yet
+
+---
+
+## Roadmap
+
+Planned features:
+
+* DOCX support
+* HTML parsing support
+* Improved table extraction
+* Section path identifiers
+* CLI tool
+* Optional semantic AI-enhanced mode
+
+---
+
+## Why This Matters
+
+Most RAG pipelines fail because:
+
+Garbage in → Garbage retrieval → Hallucinated output.
+
+DocuWeave fixes the "Garbage in" layer.
+
+Before optimizing embeddings or model prompts, optimize document structure.
+
+**Structure is intelligence.**
+
+---
+
+## Conclusion
+
+DocuWeave is not just a PDF parser.
+
+It is a structural preprocessing engine built specifically for LLM systems.
+
+By preserving layout, hierarchy, and token-awareness, it dramatically improves downstream RAG quality.
+
+Deterministic first.
+AI enrichment second.
+
+```
+```
