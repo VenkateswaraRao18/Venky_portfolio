@@ -26,10 +26,10 @@ const publications = [
   },
   {
     title: "Automated Certificate Generation and Distribution Using Flask",
-    venue: "Project / Implementation",
+    venue: "IJIRT",
     year: "2024",
     status: "Completed",
-    conference: "—",
+    conference: "IJIRT",
     description:
       "A web-based system built with Flask to automate certificate creation and distribution, improving efficiency and reducing manual effort.",
     tags: ["Flask", "Automation", "Web Development"],

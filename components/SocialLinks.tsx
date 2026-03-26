@@ -15,7 +15,8 @@ export default function SocialLinks() {
       <a href="#" className="p-2 border border-gray-200 rounded-md hover:bg-gray-100 transition">
         <Twitter size={18} />
       </a>
-      <a href="porfolio/venky-portfolio/resume.pdf" target="_blank" className="p-2 border border-gray-200 rounded-md hover:bg-gray-100 transition">
+      {/* D:\venky\projects\porfolio\venky-portfolio\resume.pdf */}
+      <a href="https://drive.google.com/file/d/1T3SXHzOPvG3t3frFpF0Qx0Ggcmnm5P47/view?usp=sharing" target="_blank" className="p-2 border border-gray-200 rounded-md hover:bg-gray-100 transition">
         <FileText size={18} />
       </a>
     </div>

@@ -43,7 +43,7 @@ const projects = [
       "Automation",
       "LLMs"
     ],
-    github: "https://github.com/yourusername/ai-data-analysis-agent",
+    github: "https://github.com/VenkateswaraRao18/ai-data-analysis-agent",
   },
 {
     title: "LLM-Aware Fine-Tuning Framework",

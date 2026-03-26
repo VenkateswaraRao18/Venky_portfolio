@@ -33,7 +33,7 @@ export default function StickySocials() {
       <SocialIcon href="https://github.com/VenkateswaraRao18" icon={<Github size={18} />} />
       <SocialIcon href="https://linkedin.com/in/venkateswara-rao-jannegorla-876890241" icon={<Linkedin size={18} />} />
       <SocialIcon href="https://twitter.com/yourusername" icon={<Twitter size={18} />} />
-      <SocialIcon href="/resume.pdf" icon={<FileText size={18} />} />
+      <SocialIcon href="https://drive.google.com/file/d/1T3SXHzOPvG3t3frFpF0Qx0Ggcmnm5P47/view?usp=sharing" icon={<FileText size={18} />} />
     </div>
   );
 }

@@ -13,29 +13,29 @@ import Link from "next/link";
 const repos = [
   {
     name: "docuweave",
-    stars: 6800,
-    forks: 536,
-    url: "https://github.com/yourusername/docuweave",
+    stars: 100,
+    forks: 50,
+    url: "https://github.com/VenkateswaraRao18/docuweave",
     description:
       "DocuWeave is designed specifically for Retrieval-Augmented Generation (RAG) pipelines. Unlike simple PDF text extractors, it preserves layout structure, builds semantic hierarchy, and produces token-aware chunks optimized for embeddings.",
     tags: ["Python", "Pdf-Parsing", "RAG", "LLM", "Vector Search"],
   },
   {
-    name: "AI-Engineering.academy",
+    name: "Vachan- AI",
     stars: 2128,
     forks: 246,
     url: "https://github.com/yourusername/ai-engineering",
-    description: "Mastering Applied AI, One Concept at a Time.",
-    tags: ["Jupyter Notebook", "fine-tuning", "finetuning-llms", "inference"],
+    description: "Designing, training, and evaluating a dialect-aware Telugu foundation model capable of understanding regional slang, conversational nuance, and code-mixed language.",
+    tags: ["LLM's", "fine-tuning", "finetuning-llms", "inference"],
   },
-  {
-    name: "Another Repo",
-    stars: 1200,
-    forks: 98,
-    url: "https://github.com/yourusername/another-repo",
-    description: "Example additional repository for toggle behavior.",
-    tags: ["React", "TypeScript", "OpenAI"],
-  },
+  // {
+  //   name: "Another Repo",
+  //   stars: 1200,
+  //   forks: 98,
+  //   url: "https://github.com/yourusername/another-repo",
+  //   description: "Example additional repository for toggle behavior.",
+  //   tags: ["React", "TypeScript", "OpenAI"],
+  // },
 ];
 
 export default function FeaturedOpenSource() {
