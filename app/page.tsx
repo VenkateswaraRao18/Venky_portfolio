@@ -22,7 +22,7 @@ export default function Home() {
         <WorkExperience />
         <FeaturedOpenSource />
         <AcademicPublications />
-        <AchievementsNews />
+        {/* <AchievementsNews /> */}
 
         {/* PASS BLOGS AS PROP */}
         <LatestBlogPosts blogs={blogs} />
