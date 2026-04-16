@@ -60,11 +60,12 @@ const projects = [
     github: "https://github.com/yourusername/llm-aware-finetuning",
   },
   {
-    title: "VARAG",
+    title: "IT Ops RAG Copilot",
     description:
-      "Vision-Augmented Retrieval and Generation integrating textual and visual information, improving contextual precision by 60%.",
-    tags: ["LLaVA", "Visual RAG", "Llama-index", "Qdrant"],
-    github: "https://github.com/yourusername/varag",
+      "Full-stack ops copilot: chunk and embed internal docs into FAISS, answer through a LangGraph agent with routing, retrieval, optional tools, and cited responses. FastAPI backend, Next.js chat + API proxy. Bedrock-optional with safe fallback; demo data instead of live ITSM; basic guardrails and health signals.",
+    tags: ["LangGraph", "FAISS", "LangChain", "FastAPI", "Next.js", "Bedrock"],
+    github: "https://github.com/VenkateswaraRao18/agentic_rag",
+    live: "https://agentic-rag-seven.vercel.app/",
   }
 ];
 
