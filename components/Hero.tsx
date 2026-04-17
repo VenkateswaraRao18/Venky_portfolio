@@ -23,7 +23,7 @@ export default function Hero() {
       {/* RIGHT SIDE IMAGE */}
       <div className="relative w-24 h-24 sm:w-40 sm:h-40 flex-shrink-0">
         <Image
-          src="/profile.jpg"
+          src="/venky_profile.PNG"
           alt="Profile"
           fill
           className="object-cover rounded-2xl"
