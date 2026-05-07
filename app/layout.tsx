@@ -23,12 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-     <body className={`${inter.variable} font-sans antialiased`}>
-  <Loader />
-  {children}
-  <StickySocials />
-  <FloatingFooterNav />
-</body>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        <Loader />
+        {children}
+        <StickySocials />
+        <FloatingFooterNav />
+      </body>
     </html>
   );
 }

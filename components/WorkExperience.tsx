@@ -6,16 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const experiences = [
-  //   {
-  //   company: "University of South Florida",
-  //   role: "Research Assistant",
-  //   date: "Feb 2026 – Present",
-  //   type: "On Site",
-  //   description:
-  //     "Built ML pipelines processing 500K+ records. Improved retention by 17% and F1-score by 26%.",
-  //   logo: "/logos/usf.jpg",
-  //   highlight: true,
-  // },
+  {
+    company: "University of South Florida",
+    role: "Graduate Student Assistant || AI Researcher",
+    date: "Feb 2026 – Present",
+    type: "On Site",
+    description:
+      "Conducting research on agentic AI, including designing and evaluating intelligent agent workflows.",
+    logo: "/logos/usf.svg",
+    highlight: true,
+  },
   {
     company: "Vegrade Innovations",
     role: "AI/ML Developer Intern",
